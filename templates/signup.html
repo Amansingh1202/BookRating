@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SingUp</title>
+</head>
+<body>
+<form action="{{ url_for('signupsuccess') }}" method="post">
+    <div>
+        <input class="form-control" name="username" placeholder="Enter Username"/><br/>
+        <input class="form-control" name="email" placeholder="Enter Email"/><br/>
+        <input class="form-control" name="passwword" placeholder="password"/><br/>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+</body>
+</html>
