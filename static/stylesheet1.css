@@ -1,5 +1,5 @@
-.login-form{
-    background-color: rgba(127,255,212,0.5);
+.login-form, .reg-form{
+    background-color: rgba(127, 255, 212, 0.5);
     width: 50%;
     margin-left: 25%;
     padding-left: 15%;
@@ -7,15 +7,17 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.login-form input{
+
+.login-form input, .reg-form input {
     width: 50%;
     font-size: 1.3em;
 }
-.login-form label{
+.login-form label, .reg-form label {
     font-size: 1.2em;
     color: blue;
 }
-.login-form button{
+
+.login-form button ,.reg-form button{
     background-color: cadetblue;
     color: aliceblue;
     padding: 0.5em;
@@ -23,10 +25,15 @@
     border-radius: 0.5em;
 }
 
-.login-form button:hover{
+.login-form button:hover ,.reg-form button:hover{
     background-color: darkslateblue;
     color: aliceblue;
 }
-.reg{
+
+.reg {
     padding-left: 17%;
+}
+h1{
+    color: #db7fe3;
+    font-size:3.3em ;
 }
