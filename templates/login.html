@@ -1,25 +1,35 @@
 {% extends "bootstrap/base.html" %}
 {% block title %}Login{% endblock %}
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='stylesheet1.css')}}">
+{% endblock %}
 
 {% block navbar %}
 <div class="navbar navbar-fixed-top">
-  <!-- ... -->
+    <!-- ... -->
 </div>
 {% endblock %}
 
 {% block content %}
-<form class="form-group" action="{{ url_for('index') }}" method="post" style="margin-top: 20px">
+<div class="login-form">
+<form action="{{ url_for('index') }}" class="form-group" method="post" style="margin-top: 20px">
     <div>
-        <input type="text" class="form-control" name="username" placeholder="Enter Username" required /><br/>
-        <input type="password" class="form-control" name="password" placeholder="Enter Password" required /><br/>
+        <label for="username">Username</label>
+        <input class="form-control" name="username" placeholder="Enter Username" required type="text"/><br/>
+        <label for="password">Password</label>
+        <input class="form-control" name="password" placeholder="Enter Password" required type="password"/><br/>
         <button type="submit">Submit</button>
     </div>
 </form>
-<form class="form-group" action="{{ url_for('signup') }}" method="post">
-    <button type="submit">Register </button>
+<form action="{{ url_for('signup') }}" class="form-group reg" method="post">
+    <label class="register_label">Not registered yet!!</label><br />
+    <button type="submit">Register</button>
 </form>
 {% if login_error == True %}
-<h2>Wrong Username or Password</h2>
+<h2 style="color: orangered;font-size: 2em">Wrong Username or Password.Try Again!!</h2>
 {% endif %}
+</div>
 
 {% endblock %}

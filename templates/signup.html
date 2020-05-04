@@ -3,16 +3,16 @@
 
 {% block navbar %}
 <div class="navbar navbar-fixed-top">
-  <!-- ... -->
+    <!-- ... -->
 </div>
 {% endblock %}
 
 {% block content %}
- <form class="form-group" action="{{ url_for('signupsuccess') }}" method="post" style="margin-top: 20px">
+<form action="{{ url_for('signupsuccess') }}" class="form-group" method="post" style="margin-top: 20px">
     <div>
-        <input class="form-control" name="username" placeholder="Enter Username" required /><br/>
-        <input type="email" class="form-control" name="email" placeholder="Enter Email" required /><br/>
-        <input type="password" class="form-control" name="password" placeholder="Enter Password" required /><br/>
+        <input class="form-control" name="username" placeholder="Enter Username" required/><br/>
+        <input class="form-control" name="email" placeholder="Enter Email" required type="email"/><br/>
+        <input class="form-control" name="password" placeholder="Enter Password" required type="password"/><br/>
         <button type="submit">Submit</button>
     </div>
 </form>
