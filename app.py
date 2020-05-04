@@ -1,12 +1,14 @@
 from flask import Flask, render_template,request
 import os
 from models import *
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
 os.environ['DATABASE_URL'] = 'postgres://postgres:AmansinghK1202@localhost:5432/prac'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
+Bootstrap(app)
 
 @app.route('/')
 def login():
@@ -23,7 +25,7 @@ def signup():
 def signupsuccess():
     username = request.form.get('username')
     email = request.form.get('email')
-    password = request.form.get('passwword')
+    password = request.form.get('password')
     try:
         user = User(username=username,email=email,password=password)
         db.session.add(user)

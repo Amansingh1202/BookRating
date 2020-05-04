@@ -1,22 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-<form action="{{ url_for('index') }}" method="post">
+{% extends "bootstrap/base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+<form class="form-group" action="{{ url_for('index') }}" method="post" style="margin-top: 20px">
     <div>
-        <input class="form-control" name="username" placeholder="Enter Username "/><br/>
-        <input class="form-control" name="password" placeholder="Enter Password"/><br/>
+        <input type="text" class="form-control" name="username" placeholder="Enter Username" required /><br/>
+        <input type="password" class="form-control" name="password" placeholder="Enter Password" required /><br/>
         <button type="submit">Submit</button>
     </div>
 </form>
-<form action="{{ url_for('signup') }}" method="post">
+<form class="form-group" action="{{ url_for('signup') }}" method="post">
     <button type="submit">Register </button>
 </form>
 {% if login_error == True %}
 <h2>Wrong Username or Password</h2>
 {% endif %}
-</body>
-</html>
+
+{% endblock %}

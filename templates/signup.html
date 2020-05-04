@@ -1,20 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SingUp</title>
-</head>
-<body>
-<form action="{{ url_for('signupsuccess') }}" method="post">
+{% extends "bootstrap/base.html" %}
+{% block title %}Sign Up{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+ <form class="form-group" action="{{ url_for('signupsuccess') }}" method="post" style="margin-top: 20px">
     <div>
-        <input class="form-control" name="username" placeholder="Enter Username"/><br/>
-        <input class="form-control" name="email" placeholder="Enter Email"/><br/>
-        <input class="form-control" name="passwword" placeholder="password"/><br/>
+        <input class="form-control" name="username" placeholder="Enter Username" required /><br/>
+        <input type="email" class="form-control" name="email" placeholder="Enter Email" required /><br/>
+        <input type="password" class="form-control" name="password" placeholder="Enter Password" required /><br/>
         <button type="submit">Submit</button>
     </div>
 </form>
 {% if signup_error == True %}
 <h2>{{ message }}</h2>
 {% endif %}
-</body>
-</html>
+{% endblock %}
