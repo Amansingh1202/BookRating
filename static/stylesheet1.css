@@ -8,7 +8,17 @@
     padding-bottom: 10px;
 }
 
-.login-form input, .reg-form input {
+.index {
+    background-color: rgba(224, 139, 90, 0.7);
+    width: 35%;
+    margin-left: 25%;
+    padding-left: 5%;
+    margin-top: 10%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.login-form input, .reg-form input ,.index input{
     width: 50%;
     font-size: 1.3em;
 }
@@ -18,7 +28,7 @@
     color: blue;
 }
 
-.login-form button, .reg-form button {
+.login-form button, .reg-form button, .index button {
     background-color: cadetblue;
     color: aliceblue;
     padding: 0.5em;
@@ -26,7 +36,7 @@
     border-radius: 0.5em;
 }
 
-.login-form button:hover, .reg-form button:hover {
+.login-form button:hover, .reg-form button:hover,.index button:hover {
     background-color: darkslateblue;
     color: aliceblue;
 }
@@ -38,4 +48,9 @@
 h1 {
     color: #db7fe3;
     font-size: 3.3em;
+}
+
+select{
+    width: 180px;
+    font-size: 1.4em;
 }

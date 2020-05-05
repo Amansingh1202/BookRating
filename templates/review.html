@@ -2,7 +2,7 @@
 {% block title %}Review{% endblock %}
 {% block styles %}
 {{super()}}
-<link href="{{url_for('.static', filename='stylesheet1.css')}}"
+<link href="{{url_for('.static', filename='stylesheet2.css')}}"
       rel="stylesheet">
 {% endblock %}
 
@@ -14,6 +14,9 @@
 
 {% block content %}
 {% for book in books %}
-<li>{{book.title}} and {{book.isbn}} </li>
+<div id="book">
+    <h2>{{book.title}}</h2>
+    <h3>{{book.author}},{{book.year}}</h3>
+</div>
 {% endfor %}
 {% endblock %}

@@ -1,5 +1,10 @@
 {% extends "bootstrap/base.html" %}
 {% block title %}Index{% endblock %}
+{% block styles %}
+{{super()}}
+<link href="{{url_for('.static', filename='stylesheet1.css')}}"
+      rel="stylesheet">
+{% endblock %}
 
 {% block navbar %}
 <div class="navbar navbar-fixed-top">
@@ -8,19 +13,20 @@
 {% endblock %}
 
 {% block content %}
-<h1>Hello</h1>
-<form action="{{ url_for('logout') }}" class="form-group" method="post">
-    <button>Log Out</button>
-</form>
-<h2>Search for a book to give review</h2>
-<form action="{{ url_for('search') }}" class="form-group" method="post">
-    <h2>Select how you want to search</h2>
-    <select name="book_opt" id="book_opt">
-        <option value="1">Title</option>
-        <option value="2">isbn</option>
-        <option value="3">Author</option>
-    </select><br />
-    <input name="search" placeholder="Search..." required type="text"/>
-    <button type="submit">search</button>
-</form>
+<div class="index">
+    <h2 style="color: darkred;font-size:2em">Search for a book to give review</h2>
+    <form action="{{ url_for('search') }}" class="form-group" method="post">
+        <h2 style="color: darkblue;font-size:1.5em">Select how you want to search:</h2>
+        <select id="book_opt" name="book_opt">
+            <option value="1">Title</option>
+            <option value="2">Isbn</option>
+            <option value="3">Author</option>
+        </select><br/>
+        <input name="search" placeholder="Search..." required type="text"/>
+        <button type="submit">search</button><br/>
+        <form action="{{ url_for('logout') }}" class="form-group" method="post">
+            <button>Log Out</button>
+        </form>
+    </form>
+</div>
 {% endblock %}
