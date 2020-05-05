@@ -15,19 +15,20 @@
 {% block content %}
 <div class="reg-form">
     <h1 style="padding-left: 16%">Register</h1>
-<form action="{{ url_for('signupsuccess') }}" class="form-group" method="post" style="margin-top: 20px">
-    <div>
-        <label for="username">Username:</label>
-        <input class="form-control" id="username" name="username" placeholder="Enter Username" required/><br/>
-        <label for="email">Email:</label>
-        <input class="form-control" id="email" name="email" placeholder="Enter Email" required type="email"/><br/>
-        <label for="password">Password:</label>
-        <input class="form-control" id="password" name="password" placeholder="Enter Password" required type="password"/><br/>
-        <button type="submit">Submit</button>
-    </div>
-</form>
+    <form action="{{ url_for('signupsuccess') }}" class="form-group" method="post" style="margin-top: 20px">
+        <div>
+            <label for="username">Username:</label>
+            <input class="form-control" id="username" name="username" placeholder="Enter Username" required/><br/>
+            <label for="email">Email:</label>
+            <input class="form-control" id="email" name="email" placeholder="Enter Email" required type="email"/><br/>
+            <label for="password">Password:</label>
+            <input class="form-control" id="password" name="password" placeholder="Enter Password" required
+                   type="password"/><br/>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    {% if signup_error == True %}
+    <h2 style="color: orangered;font-size: 2em">{{ message }}</h2>
+    {% endif %}
+    {% endblock %}
 </div>
-{% if signup_error == True %}
-<h2 style="color: orangered;font-size: 2em">{{ message }}</h2>
-{% endif %}
-{% endblock %}

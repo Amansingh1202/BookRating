@@ -1,0 +1,19 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Review{% endblock %}
+{% block styles %}
+{{super()}}
+<link href="{{url_for('.static', filename='stylesheet1.css')}}"
+      rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+    <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+{% for book in books %}
+<li>{{book.title}} and {{book.isbn}} </li>
+{% endfor %}
+{% endblock %}
