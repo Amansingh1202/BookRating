@@ -1,5 +1,4 @@
-import os
-import requests
+import os,requests,json
 
 from flask import Flask, render_template, request, session
 from flask_bootstrap import Bootstrap
@@ -77,3 +76,15 @@ def search():
         return render_template('error.html', error='No book Found,Try Again!!')
     else:
         return render_template('review.html', books=books)
+
+@app.route('/api/<string:isbn>', methods=['GET'])
+def book_api(isbn):
+    books = Books.query.filter_by(isbn = isbn).first()
+    x = {
+        'ISBN':books.isbn,
+        'Title':books.title,
+        'Author':books.author,
+        'Year':books.year
+    }
+    res = json.dumps(x,indent=3)
+    return(res)
