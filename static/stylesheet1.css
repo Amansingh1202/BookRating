@@ -18,7 +18,7 @@
     padding-bottom: 30px;
 }
 
-.login-form input, .reg-form input ,.index input{
+.login-form input, .reg-form input, .index input {
     width: 50%;
     font-size: 1.3em;
 }
@@ -36,7 +36,7 @@
     border-radius: 0.5em;
 }
 
-.login-form button:hover, .reg-form button:hover,.index button:hover {
+.login-form button:hover, .reg-form button:hover, .index button:hover {
     background-color: darkslateblue;
     color: aliceblue;
 }
@@ -50,7 +50,7 @@ h1 {
     font-size: 3.3em;
 }
 
-select{
+select {
     width: 180px;
     font-size: 1.4em;
 }

@@ -5,7 +5,6 @@
 <link href="{{url_for('.static', filename='stylesheet2.css')}}"
       rel="stylesheet">
 {% endblock %}
-
 {% block navbar %}
 <div class="navbar navbar-fixed-top">
     <!-- ... -->
@@ -14,9 +13,28 @@
 
 {% block content %}
 {% for book in books %}
+<div id="cover">
 <div id="book">
+    <h3>Book Id:{{book.id}}</h3>
     <h2>{{book.title}}</h2>
     <h3>{{book.author}},{{book.year}}</h3>
+    <h4>Rate::</h4>
+    <form action="{{ url_for('addReview') }}" class="form-group" method="post" name="rev-form">
+        <select name="rate">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br/>
+        <h4>Book Id:</h4>
+        <input type="number" name="book_id" required/>
+        <br/>
+        <br/>
+        <button type="submit">Add Rating</button>
+    </form>
+</div>
 </div>
 {% endfor %}
 {% endblock %}

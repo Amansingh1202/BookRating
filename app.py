@@ -13,8 +13,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 Bootstrap(app)
-
-
 @app.route('/')
 def login():
     login_error = False
@@ -49,7 +47,6 @@ def index():
     password = request.form.get('password')
     user = User.query.filter_by(username=username).first()
     session['user_id'] = user.id
-    print(session)
     if user.password == password:
         return render_template('index.html')
     else:
@@ -65,6 +62,7 @@ def logout():
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
+    global books
     name = request.form.get('search')
     book_opt = int(request.form.get('book_opt'))
     if book_opt == 1:
@@ -73,7 +71,11 @@ def search():
         books = Books.query.filter(Books.isbn.like(f'%{name}%')).all()
     elif book_opt == 3:
         books = Books.query.filter(Books.author.like(f'%{name}%')).all()
+    else:
+        books = None
     if books == None:
+        return render_template('error.html', error='No book Found,Try Again!!')
+    elif books == []:
         return render_template('error.html', error='No book Found,Try Again!!')
     else:
         return render_template('review.html', books=books)
@@ -81,12 +83,31 @@ def search():
 
 @app.route('/api/<string:isbn>', methods=['GET'])
 def book_api(isbn):
-    books = Books.query.filter_by(isbn=isbn).first()
+    book = Books.query.filter_by(isbn=isbn).first()
     x = {
-        'ISBN': books.isbn,
-        'Title': books.title,
-        'Author': books.author,
-        'Year': books.year
+        'ISBN': book.isbn,
+        'Title': book.title,
+        'Author': book.author,
+        'Year': book.year
     }
     res = json.dumps(x, indent=3)
     return (res)
+
+
+@app.route('/addReview', methods=['POST'])
+def addReview():
+    rev = request.form.get('rate')
+    present = False
+    book_id = int(request.form.get('book_id'))
+    user_id = session['user_id']
+    reviews = Review.query.filter_by(user_id=user_id).all()
+    for review in reviews:
+        if review.book_id == book_id:
+            present=True
+    if present == False:
+        review = Review(book_id=book_id,user_id=user_id,rev=rev)
+        db.session.add(review)
+        db.session.commit()
+        return render_template('success.html',message = 'Rating Added Successfully')
+    else:
+        return render_template('error.html', error='You have already submitted review for this book!!')

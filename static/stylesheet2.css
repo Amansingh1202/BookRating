@@ -1,8 +1,52 @@
+#cover{
+    background-color:#ccd6e6;
+    padding: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
 #book {
     background-color: greenyellow;
     padding: 10px;
     padding-left: 20px;
-    margin-top: 15px;
-    width: 25%;
-    margin-left: 15%;
+    width: 35%;
+    margin-left: 25em
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+    width: 15%;
+    background-color: lightgoldenrodyellow;
+    font-size: 1.3em;
+}
+input[type=number]{
+    -moz-appearance: textfield;
+    width: 15%;
+    background-color: lightgoldenrodyellow;
+    font-size: 1.3em;
+}
+select,input{
+    width: 15%;
+    background-color: lightgoldenrodyellow;
+    font-size: 1.3em;
+}
+button {
+    background-color: cadetblue;
+    color: aliceblue;
+    padding: 0.3em;
+    font-size: 1.4em;
+    border-radius: 0.5em;
+}
+button:hover {
+    background-color: darkslateblue;
+    color: aliceblue;
+}
+
+.rev-form{
+    padding-left: 15%;
+}
+h4{
+    color: darkslateblue;
 }

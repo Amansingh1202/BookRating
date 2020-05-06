@@ -13,7 +13,7 @@ db.init_app(app)
 
 
 def main():
-    with open('books.csv') as csv_file:
+    with open('static/books.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
@@ -21,12 +21,14 @@ def main():
                 line_count += 1
                 pass
             else:
-                print(row)
                 book = Books(isbn=row[0], title=row[1], author=row[2], year=int(row[3]))
                 line_count += 1
                 db.session.add(book)
                 db.session.commit()
-
+    try:
+        print('Added all the books')
+    except Exception:
+        print('Error occurred')
 
 if __name__ == '__main__':
     with app.app_context():
