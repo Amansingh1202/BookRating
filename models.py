@@ -18,7 +18,7 @@ class Books(db.Model):
     title = db.Column(db.String, nullable=False)
     author = db.Column(db.String, nullable=False)
     year = db.Column(db.Integer, nullable=False)
-    avg_review = db.Column(db.Integer)
+    avg_review = db.Column(db.DECIMAL(asdecimal=False))
     total_rating = db.Column(db.Integer)
 
 

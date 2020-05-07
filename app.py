@@ -88,7 +88,9 @@ def book_api(isbn):
         'ISBN': book.isbn,
         'Title': book.title,
         'Author': book.author,
-        'Year': book.year
+        'Year': book.year,
+        'Average Review':book.avg_review,
+        'Total Number of Ratings':book.total_rating
     }
     res = json.dumps(x, indent=3)
     return (res)
@@ -106,6 +108,15 @@ def addReview():
             present=True
     if present == False:
         review = Review(book_id=book_id,user_id=user_id,rev=rev)
+        book = Books.query.filter_by(id=book_id).first()
+        if book.avg_review == None:
+            book.avg_review = rev
+            book.total_rating = 1
+            db.session.commit()
+        else:
+            book.avg_review = round((book.total_rating*book.avg_review)/(book.total_rating+1),2)
+            book.total_rating = book.total_rating + 1
+            db.session.commit()
         db.session.add(review)
         db.session.commit()
         return render_template('success.html',message = 'Rating Added Successfully')
