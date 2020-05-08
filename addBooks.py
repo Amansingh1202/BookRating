@@ -1,3 +1,4 @@
+# Add all the books from static/books.csv to the Books database
 import csv
 import os
 
@@ -29,6 +30,7 @@ def main():
         print('Added all the books')
     except Exception:
         print('Error occurred')
+
 
 if __name__ == '__main__':
     with app.app_context():

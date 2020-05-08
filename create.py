@@ -1,3 +1,5 @@
+#  Creates all the required databases
+
 import os
 
 from flask import Flask

@@ -1,11 +1,12 @@
-#cover{
-    background-color:#ccd6e6;
+#cover {
+    background-color: #ccd6e6;
     padding: 20px;
     margin-left: 20%;
     margin-right: 20%;
     margin-bottom: 5px;
     margin-top: 5px;
 }
+
 #book {
     background-color: greenyellow;
     padding: 10px;
@@ -13,25 +14,29 @@
     width: 35%;
     margin-left: 25em
 }
+
 input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button{
+input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
     width: 15%;
     background-color: lightgoldenrodyellow;
     font-size: 1.3em;
 }
-input[type=number]{
+
+input[type=number] {
     -moz-appearance: textfield;
     width: 15%;
     background-color: lightgoldenrodyellow;
     font-size: 1.3em;
 }
-select,input{
+
+select, input {
     width: 15%;
     background-color: lightgoldenrodyellow;
     font-size: 1.3em;
 }
+
 button {
     background-color: cadetblue;
     color: aliceblue;
@@ -39,14 +44,16 @@ button {
     font-size: 1.4em;
     border-radius: 0.5em;
 }
+
 button:hover {
     background-color: darkslateblue;
     color: aliceblue;
 }
 
-.rev-form{
+.rev-form {
     padding-left: 15%;
 }
-h4{
+
+h4 {
     color: darkslateblue;
 }

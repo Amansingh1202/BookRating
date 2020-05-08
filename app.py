@@ -13,6 +13,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 Bootstrap(app)
+
+
 @app.route('/')
 def login():
     login_error = False
@@ -81,44 +83,68 @@ def search():
         return render_template('review.html', books=books)
 
 
+# This API returns the book details in JSON format given the ISBN number of the book
 @app.route('/api/<string:isbn>', methods=['GET'])
 def book_api(isbn):
-    book = Books.query.filter_by(isbn=isbn).first()
-    x = {
-        'ISBN': book.isbn,
-        'Title': book.title,
-        'Author': book.author,
-        'Year': book.year,
-        'Average Review':book.avg_review,
-        'Total Number of Ratings':book.total_rating
-    }
-    res = json.dumps(x, indent=3)
-    return (res)
+    if len(isbn) != 10:
+        x = {
+            'Error': 'Incorrect ISBN number',
+            'Status': 400
+        }
+        res = json.dumps(x, indent=3)
+        return (res)
+    elif isbn[0:8].isnumeric() == True:
+        book = Books.query.filter_by(isbn=isbn).first()
+        if book == None:
+            x = {
+                'Error': 'No book with this ISBN number',
+                'Status':400
+            }
+            res = json.dumps(x, indent=3)
+            return (res)
+        else:
+            x = {
+                'ISBN': book.isbn,
+                'Title': book.title,
+                'Author': book.author,
+                'Year': book.year,
+                'Average Review': book.avg_review,
+                'Total Number of Ratings': book.total_rating
+            }
+            res = json.dumps(x, indent=3)
+            return (res)
+    else:
+        x = {
+            'Error':'Incorrect ISBN number',
+            'Status': 400
+        }
+        res = json.dumps(x, indent=3)
+        return (res)
 
 
 @app.route('/addReview', methods=['POST'])
 def addReview():
-    rev = request.form.get('rate')
     present = False
-    book_id = int(request.form.get('book_id'))
+    rev = request.form.get('rate')
+    book_id = request.form.get('book_id')
     user_id = session['user_id']
     reviews = Review.query.filter_by(user_id=user_id).all()
     for review in reviews:
         if review.book_id == book_id:
-            present=True
+            present = True
     if present == False:
-        review = Review(book_id=book_id,user_id=user_id,rev=rev)
+        review = Review(book_id=book_id, user_id=user_id, rev=rev)
         book = Books.query.filter_by(id=book_id).first()
         if book.avg_review == None:
             book.avg_review = rev
             book.total_rating = 1
             db.session.commit()
         else:
-            book.avg_review = round((book.total_rating*book.avg_review)/(book.total_rating+1),2)
+            book.avg_review = round((book.total_rating * book.avg_review) / (book.total_rating + 1), 2)
             book.total_rating = book.total_rating + 1
             db.session.commit()
         db.session.add(review)
         db.session.commit()
-        return render_template('success.html',message = 'Rating Added Successfully')
+        return render_template('success.html', message='Rating Added Successfully')
     else:
         return render_template('error.html', error='You have already submitted review for this book!!')
