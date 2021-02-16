@@ -1,15 +1,16 @@
+from models import *
+from flask_bootstrap import Bootstrap
+from flask import Flask, render_template, request, session
 import json
 import os
+from dotenv import load_dotenv
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(BASEDIR, '.env'))
 
-from flask import Flask, render_template, request, session
-from flask_bootstrap import Bootstrap
-
-from models import *
 
 app = Flask(__name__)
-app.secret_key = 'OCML3BRawWEUeaxcuKi'
-os.environ['DATABASE_URL'] = 'postgres://postgres:AmansinghK1202@localhost:5432/prac'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+app.secret_key = os.getenv("APP_SECRET_KEY")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 Bootstrap(app)
@@ -98,7 +99,7 @@ def book_api(isbn):
         if book == None:
             x = {
                 'Error': 'No book with this ISBN number',
-                'Status':400
+                'Status': 400
             }
             res = json.dumps(x, indent=3)
             return (res)
@@ -115,7 +116,7 @@ def book_api(isbn):
             return (res)
     else:
         x = {
-            'Error':'Incorrect ISBN number',
+            'Error': 'Incorrect ISBN number',
             'Status': 400
         }
         res = json.dumps(x, indent=3)
@@ -140,7 +141,8 @@ def addReview():
             book.total_rating = 1
             db.session.commit()
         else:
-            book.avg_review = round((book.total_rating * book.avg_review) / (book.total_rating + 1), 2)
+            book.avg_review = round(
+                (book.total_rating * book.avg_review) / (book.total_rating + 1), 2)
             book.total_rating = book.total_rating + 1
             db.session.commit()
         db.session.add(review)
